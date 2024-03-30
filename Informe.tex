@@ -1,0 +1,400 @@
+%
+% Plantilla de informe tipo articulo 
+% UPT - Escuela de Sistemas
+% 
+% Dr. Oscar J. Jimenez Flores
+% Webpage: https://ctivitae.concytec.gob.pe/appDirectorioCTI/VerDatosInvestigador.do?id_investigador=33398
+% Orcid: https://orcid.org/0000-0002-7981-8467
+%
+
+\documentclass[11pt,a4paper]{article} 
+
+%-----------------------------------------------------------------------------
+% REQUERIMIENTO DE PAQUETES Y CONFIGURACIONES
+%-----------------------------------------------------------------------------
+% PAQUETES PARA TÍTULOS
+\usepackage{titlesec}
+\usepackage{color}
+
+% PAQUETES PARA IDIOMA Y FUENTE
+\usepackage[utf8]{inputenc}
+\usepackage[spanish]{babel}
+\usepackage[T1]{fontenc} % Codificación de fuente
+
+% PAQUETES PARA IMÁGENES
+\usepackage{graphicx}
+\graphicspath{{Images/}}
+\usepackage{eso-pic} % Para la imagen de fondo en la página de título
+\usepackage{subfig} % Subfiguras numeradas y con leyenda
+\usepackage{caption} % Leyendas de color
+\usepackage{transparent}
+
+% PAQUETES DE MATEMÁTICAS ESTÁNDAR
+\usepackage{amsmath}
+\usepackage{amsthm}
+\usepackage{bm}
+\usepackage[overload]{empheq} % Para sistemas de ecuaciones con llaves
+
+% PAQUETES PARA TABLAS
+\usepackage{tabularx}
+\usepackage{longtable} % Tablas que pueden abarcar varias páginas
+\usepackage{colortbl}
+\addto\captionsspanish{\renewcommand{\tablename}{Tabla}}% Cambiar el nombre de la tabla en español
+\captionsetup[table]{labelsep=period}% Establecer el separador de etiquetas de las tablas como un punto
+\DeclareCaptionLabelFormat{algorithmlabel}{Código #2.} % Añadir un punto después del número del algoritmo en el título
+\captionsetup[algorithm]{labelformat=algorithmlabel} % Añadir un punto después del número del algoritmo en el título
+
+% PAQUETES PARA ALGORITMOS (PSEUDO-CÓDIGO)
+\usepackage{algorithm}
+\usepackage{algorithmic}
+\floatname{algorithm}{Código}% Cambiar el nombre predeterminado de "Algorithm" a "Código"
+
+% PAQUETES PARA REFERENCIAS Y BIBLIOGRAFÍA
+\usepackage[colorlinks=true,linkcolor=black,anchorcolor=black,citecolor=black,filecolor=black,menucolor=black,runcolor=black,urlcolor=black]{hyperref} % Añade enlaces clicables a las referencias
+\usepackage{cleveref}
+\usepackage[square, numbers, sort&compress]{natbib} % Corchetes cuadrados, referencias citadas con números, citas ordenadas por aparición en el texto y comprimidas
+\bibliographystyle{plain} % Puedes usar un estilo diferente adaptado a tu campo
+
+% PAQUETES PARA EL APÉNDICE
+\usepackage{appendix}
+
+% PAQUETES PARA ENUMERACIONES Y LISTAS
+\usepackage{enumitem}
+
+% OTROS PAQUETES
+\usepackage{amsthm,thmtools,xcolor} % Teorema coloreado
+\usepackage{comment} % Comentar partes del código
+\usepackage{fancyhdr} % Encabezados y pies de página personalizados
+\usepackage{lipsum} % Insertar texto ficticio
+\usepackage{tcolorbox} % Crear cajas de color (por ejemplo, para las palabras clave)
+\usepackage{float} % Para posicionar las tablas con [H]
+
+
+%-------------------------------------------------------------------------
+% DEFINICIÓN DE NUEVOS COMANDOS
+%-------------------------------------------------------------------------
+% EJEMPLOS DE NUEVOS COMANDOS -> aquí se muestra cómo definir nuevos comandos
+\newcommand{\bea}{\begin{eqnarray}} % Atajo para matrices de ecuaciones
+\newcommand{\eea}{\end{eqnarray}}
+\newcommand{\e}[1]{\times 10^{#1}} % Notación de potencias de 10
+\newcommand{\mathbbm}[1]{\text{\usefont{U}{bbm}{m}{n}#1}} % De mathbbm.sty
+\newcommand{\pdev}[2]{\frac{\partial#1}{\partial#2}}
+% NB: también puedes sobrescribir algunos comandos existentes con la palabra clave \renewcommand
+
+%----------------------------------------------------------------------------
+% AGREGA TUS PAQUETES (ten cuidado con la interacción de paquetes)
+%----------------------------------------------------------------------------
+
+%----------------------------------------------------------------------------
+% AGREGA TUS DEFINICIONES Y COMANDOS (ten cuidado con los comandos existentes)
+%----------------------------------------------------------------------------
+
+% No cambies el archivo Configuration_files/config.tex a menos que realmente sepas lo que estás haciendo.
+% Este archivo finaliza los procedimientos de configuración (por ejemplo, personalización de comandos, definición de nuevos comandos)
+\input{Configuration_files/config}
+
+% Inserta aquí la información que se mostrará en tu página de título
+% -> título de tu trabajo
+\renewcommand{\title}{Título del informe, práctica, caso de estudio, etc.}
+% -> nombres y apellidos del autor o autores, seguido de su código Orcid (https://orcid.org)
+\newcommand{\authorsAndIDs}{%
+    {1. Nombres y apellidos, {\href{https://orcid.org/0000-0002-7981-8467}{0000-0002-7981-8467}}}\\ 
+    {2. Nombres y apellidos, Código Orcid}\\ 
+    {3. Nombres y apellidos, Código Orcid}%
+}
+
+% -> curso
+\newcommand{\course}{Código del curso, nombre del curso}
+% -> nombre y apellido del docente asesor
+\newcommand{\advisor}{\href{https://dina.concytec.gob.pe/appDirectorioCTI/VerDatosInvestigador.do?id_investigador=33398}{Dr. Oscar J. Jimenez Flores}}
+% -> Código Orcid del docente asesor
+\newcommand{\Orcid}{\href{https://orcid.org/0000-0002-7981-8467}{0000-0002-7981-8467}} % inserta si hay alguno, de lo contrario, comenta
+% -> año académico
+\newcommand{\YEAR}{UPT-EPIS, 2024-I}
+% -> resumen (solo en español)
+\renewcommand{\abstract}{%
+    Aquí va el resumen de su trabajo académico, seguido de una lista de palabras clave.
+    
+    El resumen es conciso entre 200 a 250 palabras, inicia explicando el trabajo académico, el objetivo o propósito, su resultado más relevante y la conclusión más importante.
+    }
+
+% -> palabras clave (solo en inglés)
+\newcommand{\keywords}{aquí, 3 palabras claves, que hagan referencia a su título, separados por una coma.}
+
+%-------------------------------------------------------------------------
+% INICIO DE TU DOCUMENTO
+%-------------------------------------------------------------------------
+\begin{document}
+
+%-----------------------------------------------------------------------------
+% PÁGINA DE TÍTULO
+%-----------------------------------------------------------------------------
+% No cambies Configuration_files/TitlePage.tex (Modifícalo SOLO SI y SOLO SI necesitas agregar o eliminar los co-asesores)
+% Este archivo crea la Página de Título del documento
+\input{Configuration_files/title_page}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% TEXTO PRINCIPAL          %%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%-----------------------------------------------------------------------------
+% INTRODUCCIÓN
+%-----------------------------------------------------------------------------
+\section{Introducción}
+\label{sec:introduction}
+Este documento tiene como objetivo servir tanto como un ejemplo de la plantilla \LaTeX{} de informe para los cursos del Dr. Oscar Jimenez, como una breve introducción de relleno. No pretende ser una introducción general a \LaTeX{} en sí misma, y se asume que el lector está familiarizado con los conceptos básicos de creación y compilación de documentos \LaTeX{} (ver \cite{oetiker1995not, kottwitz2015latex}). 
+\\
+La página de portada en formato de artículo debe contener toda la información relevante: título, nombre del Programa de Estudio, nombre(s) del autor(es), número orcid del estudiante, nombre del docente, entre otros.
+\\
+Asegúrese de seleccionar un título significativo. Debería contener palabras clave importantes para ser identificado por el indexador de google. Mantenga el título lo más conciso posible y comprensible incluso para personas que no sean expertas en su campo. El título debe ser elegido al final de su trabajo para que capture con precisión el tema principal del manuscrito.
+
+Es conveniente dividir el formato de informe en secciones y subsecciones. Si es necesario, se pueden utilizar subsubsecciones, párrafos y subpárrafos. Una nueva sección se crea con el comando
+\begin{verbatim}
+\section{Título de la sección}
+\end{verbatim}
+La numeración se puede desactivar usando \verb|\section*{}|. Una nueva subsección se crea con el comando
+\begin{verbatim}
+\subsection{Título de la subsección}
+\end{verbatim}
+y, de manera similar, la numeración se puede desactivar agregando un asterisco de la siguiente manera 
+\begin{verbatim}
+\subsection*{}
+\end{verbatim}
+Se recomienda darle una etiqueta a cada sección usando el comando
+\begin{verbatim}
+\label{sec:nombre_sección}%
+\end{verbatim}
+donde el argumento es simplemente una cadena de texto que utilizará para hacer referencia a esa parte como sigue: \textit{La \sc{INTRODUCCIÓN} se encuentra en la \ref{sec:introduction} \dots}.
+
+
+%-----------------------------------------------------------------------------
+% ECUACIONES
+%-----------------------------------------------------------------------------
+\section{Ecuaciones}
+\label{sec:eqs}
+Esta sección presenta algunos ejemplos de cómo escribir ecuaciones matemáticas.
+
+Las ecuaciones de Maxwell son las siguientes:
+\begin{subequations}
+    \label{eq:maxwell}
+    \begin{align}[left=\empheqlbrace]
+    \nabla\cdot \bm{D} & = \rho, \label{eq:maxwell1} \\
+    \nabla \times \bm{E} +  \frac{\partial \bm{B}}{\partial t} & = \bm{0}, \label{eq:maxwell2} \\
+    \nabla\cdot \bm{B} & = 0, \label{eq:maxwell3} \\
+    \nabla \times \bm{H} - \frac{\partial \bm{D}}{\partial t} &= \bm{J}. \label{eq:maxwell4}
+    \end{align}
+\end{subequations}
+
+La Ecuación~\eqref{eq:maxwell} está automáticamente etiquetada por \texttt{cleveref},
+así como la Ecuación~\eqref{eq:maxwell1} y la Ecuación~\eqref{eq:maxwell3}.
+Gracias al paquete \verb|cleveref|, no es necesario usar \verb|\eqref|.
+Las ecuaciones deben numerarse solo si se hacen referencia a ellas en el texto.
+
+Las ecuaciones~\eqref{eq:maxwell_multilabels1}, \eqref{eq:maxwell_multilabels2}, \eqref{eq:maxwell_multilabels3} y \eqref{eq:maxwell_multilabels4} muestran nuevamente las ecuaciones de Maxwell sin llaves:
+\begin{align}
+    \nabla\cdot \bm{D} & = \rho, \label{eq:maxwell_multilabels1} \\
+    \nabla \times \bm{E} +  \frac{\partial \bm{B}}{\partial t} &= \bm{0}, \label{eq:maxwell_multilabels2} \\
+    \nabla\cdot \bm{B} & = 0, \label{eq:maxwell_multilabels3} \\
+    \nabla \times \bm{H} - \frac{\partial \bm{D}}{\partial t} &= \bm{J} \label{eq:maxwell_multilabels4}.
+\end{align}
+
+La Ecuación~\eqref{eq:maxwell_singlelabel} es la misma que antes,
+pero con solo una etiqueta:
+\begin{equation}
+    \label{eq:maxwell_singlelabel}
+    \left\{
+    \begin{aligned}
+    \nabla\cdot \bm{D} & = \rho, \\
+    \nabla \times \bm{E} +  \frac{\partial \bm{B}}{\partial t} &= \bm{0},\\
+    \nabla\cdot \bm{B} & = 0, \\
+    \nabla \times \bm{H} - \frac{\partial \bm{D}}{\partial t} &= \bm{J}.
+    \end{aligned}
+    \right.
+\end{equation}
+
+%-----------------------------------------------------------------------------
+% FIGURAS, TABLAS Y ALGORITMOS
+%-----------------------------------------------------------------------------
+\section{Figuras, Tablas y Algoritmos}
+
+Las figuras, tablas y algoritmos deben contener un título que describa su contenido, y deben ser referenciados adecuadamente en el texto.
+
+\subsection{Figuras}
+\label{subsec:figures}
+
+Para incluir imágenes en tu texto, puedes usar \texttt{TikZ} para figuras hechas a mano de alta calidad \cite{tikz}, o simplemente incluirlas con el comando
+\begin{verbatim}
+\includegraphics[opciones]{nombre_archivo.xxx}
+\end{verbatim}
+Aquí, xxx es el formato correcto, por ejemplo, \verb|.png|, \verb|.jpg|, \verb|.eps|, \dots.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.2\textwidth]{LogoEPIS.png}
+    \caption{Pie de la Figura.}
+    \label{fig:quadtree}
+\end{figure}
+
+Gracias al comando \texttt{\textbackslash subfloat}, una única figura, como la Figura~\ref{fig:quadtree}, puede contener múltiples sub-figuras con su propia leyenda y etiqueta, por ejemplo, Figura~\ref{fig:LogoEPIS} y Figura~\ref{fig:LogoUPT}. 
+
+\begin{figure}[H]
+    \centering
+    \subfloat[Logo de EPIS.\label{fig:LogoEPIS}]{
+        \includegraphics[scale=0.4]{Images/LogoEPIS.png}
+    }
+    \quad
+    \subfloat[Otro logo de UPT.\label{fig:LogoUPT}]{
+        \includegraphics[scale=0.9]{Images/LogoUPT.png}
+    }
+    \caption[]{Pie de la Figura.}
+    \label{fig:quadtree2}
+\end{figure}
+
+\subsection{Tablas}
+\label{subsec:tables}
+
+Dentro de los entornos \texttt{table} y \texttt{tabular}, puedes crear tablas muy elaboradas como la que se muestra en la Tabla~\ref{table:example}.
+
+\begin{table}[htb]
+    \caption{\textbf{Título de la Tabla}}
+    \centering 
+    \begin{tabular}{cccc}
+    %\rowcolor{blue!20}
+    \hline
+    \textbf{} & \textbf{columna1} & \textbf{columna2} & \textbf{columna3} \\
+    \hline 
+    fila1 & 1 & 2 & 3 \\
+    fila2 & $\alpha$ & $\beta$ & $\gamma$ \\
+    fila3 & alpha & beta & gamma \\
+    \hline
+    \end{tabular}
+    \vspace{6pt} % Ajusta el espacio entre la tabla y la nota
+    \caption*{Nota: Pie de la Tabla.}
+    \label{table:example}
+\end{table}
+
+También puedes considerar resaltar columnas o filas seleccionadas para hacer las tablas más legibles. Además, con el uso de \texttt{table*} y la opción \texttt{bp}, es posible alinearlas en la parte inferior de la página. Un ejemplo se presenta en la Tabla~\ref{table:exampleC}.
+
+\begin{table}[htb]
+    \caption{\textbf{Título de la Tabla}}
+    \centering 
+    \begin{tabular}{|p{3em} | c | c | c | c | c | c|}
+    %\rowcolor{BlueCustom!40}
+    \hline
+     & \textbf{columna1} & \textbf{columna2} & \textbf{columna3} & \textbf{columna4} & \textbf{columna5} & \textbf{columna6} \T\B \\
+    \hline
+    \textbf{fila1} & 1 & 2 & 3 & 4 & 5 & 6 \T\B\\
+    \textbf{fila2} & a & b & c & d & e & f \T\B\\
+    \textbf{fila3} & $\alpha$ & $\beta$ & $\gamma$ & $\delta$ & $\phi$ & $\omega$ \T\B\\
+    \textbf{fila4} & alpha & beta & gamma & delta & phi & omega \B\\
+    \hline
+    \end{tabular}
+    \vspace{6pt} % Ajusta el espacio entre la tabla y la nota
+    \caption*{Nota: Resaltando las columnas}
+    \label{table:exampleC}
+\end{table}
+
+
+\subsection{Algoritmos}
+\label{subsec:algorithms}
+
+Se pueden escribir pseudo-algoritmos en \LaTeX{} con los paquetes \texttt{algorithm} y \texttt{algorithmic}. Un ejemplo se muestra en el Código~\ref{alg:var}.
+
+\begin{algorithm}[H]
+\caption{Nombre del Algoritmo}
+\label{alg:var}
+\label{protocol1}
+\begin{algorithmic}[1]
+\STATE Instrucciones iniciales
+\FOR{$condición\_para$}
+\STATE{Algunas instrucciones}
+\IF{$condición\_si$}
+\STATE{Algunas otras instrucciones}
+\ENDIF
+\ENDFOR
+\WHILE{$condición\_mientras$}
+\STATE{Algunas instrucciones adicionales}
+\ENDWHILE
+\STATE Instrucciones finales
+\end{algorithmic}
+\end{algorithm} 
+
+
+\section{Algunas sugerencias útiles adicionales}
+
+Los teoremas deben formatearse de la siguiente manera:
+\begin{theorem}
+\label{a_theorem}
+Escribe aquí tu teorema.
+\end{theorem}
+\textit{Demostración.} Si es útil, puedes incluir aquí la demostración.
+\vspace{0.3cm} % Insertar espacio vertical
+
+Las proposiciones deben formatearse de la siguiente manera:
+\begin{proposition}
+Escribe aquí tu proposición.
+\end{proposition}
+\vspace{0.3cm} % Insertar espacio vertical
+
+Cómo insertar listas con viñetas:
+\begin{itemize}
+    \item primer elemento;
+    \item segundo elemento.
+\end{itemize}
+Cómo escribir listas numeradas:
+\begin{enumerate}
+    \item primer elemento;
+    \item segundo elemento.
+\end{enumerate}
+
+\section{Uso de material con derechos de autor}
+
+Cada estudiante es responsable de obtener permisos de derechos de autor, si es necesario, para incluir material publicado en su trabajo académico.
+Esto se aplica típicamente al material de terceros publicado por otra persona.
+
+\section{Plagio}
+
+Debes asegurarte de respetar las reglas de derechos de autor y evitar el plagio involuntario.
+Se permite tomar las ideas de otras personas solo si se menciona claramente al autor y su obra original.
+Como se establece en el Código de Ética y Conducta de la Universidad Privada de Tacna, \textit{promueve la integridad de la investigación,
+condena la manipulación y la infracción de la propiedad intelectual}, y brinda la oportunidad a todos aquellos
+que realizan actividades de investigación de recibir una formación adecuada sobre la conducta ética e integridad al hacer investigación.
+Para asegurarte de respetar las reglas de derechos de autor, lee las guías sobre legislación de derechos de autor y estilos de cita disponibles en:
+\begin{verbatim}
+    https://www.upt.edu.pe/upt/sgc/assets/ckeditor/kcfinder/upload/files/R.162-2018-UPT-CU.pdf
+\end{verbatim}
+
+\section{Conclusiones}
+\color{black}
+Una sección final que contenga las principales conclusiones de tu informe, caso, práctica, investigación/estudio, producto de tu trabajo y debe ser insertada en la sección "Conclusiones".
+
+\section{Bibliografía y citas}
+Tu trabajo académico debe contener una bibliografía adecuada que enumere todas las fuentes consultadas para desarrollar el trabajo.
+La lista de referencias se coloca al final del manuscrito después del capítulo que contiene las conclusiones.
+Se sugiere usar el paquete BibTeX y guardar las referencias bibliográficas en el archivo \verb|bibliography.bib|.
+De hecho, este es una base de datos que contiene toda la información sobre las referencias. Para citar en tu manuscrito, usa el comando \verb|\cite{}| de la siguiente manera:
+\\
+\textit{Así es como citas entradas bibliográficas: \cite{knuth74}, o varias a la vez: \cite{knuth92,lamport94}}.
+\\
+La bibliografía y la lista de referencias se generan automáticamente ejecutando BibTeX \cite{bibtex}.
+
+%-----------------------------------------------------------------------------
+% BIBLIOGRAFÍA
+%-----------------------------------------------------------------------------
+\bibliography{bibliography.bib}
+
+%\newpage % Insertar salto de página
+
+\appendix
+\section{Anexo - Evidencias del informe}
+Si necesitas incluir un anexo con evidencia para respaldar el trabajo académico, puedes colocarlo al final del manuscrito.
+Un anexo contiene material suplementario (figuras, tablas, datos, códigos, pruebas matemáticas, encuestas, \dots)
+que complementan los resultados principales contenidos en las secciones anteriores.
+
+\section{Anexo - Fotografías tomadas/entrevistas/instrumentos/etc}
+Puede ser necesario incluir otro anexo para organizar mejor la presentación de material suplementario.
+
+%-------------------------------------------------------------------------
+%	FIN DEL DOCUMENTO
+%-------------------------------------------------------------------------
+\end{document}
